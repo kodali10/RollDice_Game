@@ -35,9 +35,23 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 function nextPlayer() {
     roundScore = 0;
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
-
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
     document.querySelector('.player-panel-0').classList.toggle('active');
     document.querySelector('.player-panel-1').classList.toggle('active');
     document.querySelector('.dice').style.display = 'none'
 }
+
+document.querySelector('.btn-hold').addEventListener('click', function () {
+    document.querySelector('.dice').style.display = 'none'
+    scores[activePlayer] += roundScore;
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+    if (scores[activePlayer] >= 100) {
+        document.querySelector('#name-' + activePlayer).textContent = 'Winner!'
+        document.querySelector('.dice').style.display = 'none';
+    }
+    else {
+        nextPlayer();
+    }
+
+});
